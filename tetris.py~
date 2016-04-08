@@ -21,6 +21,28 @@ def is_valid(direction, shape, blocks): #checks a shape against the current bloc
 	if direction == 'left':
 		return True
 
+def row_check(blocks):
+	rows = [] #checks y-coors of blocks and returns rows that should be cleared
+	y_coors = [b[1] for b in blocks]
+	unique_coors = set(y_coors)
+	for u in unique_coors:
+		if y_coors.count(u) == 10:
+			rows.append(u)
+	return rows
+
+def clear_rows(blocks, rows): #delete rows
+	for r in rows:
+		for b in blocks:
+			if b[1] == r:
+				blocks.remove(b)
+
+def move_down(blocks, rows): #called before clear rows
+	for r in rows:
+		for b in blocks:
+			if b[1] > r:
+				b[1] += 30
+
+
 def main():
 	pygame.init()
 	screen = pygame.display.set_mode([300, 720])
@@ -29,6 +51,7 @@ def main():
 	purple = 155, 0, 155
 	current_shape = Shape()
 	blocks = []
+	cleared = []
 
 	while 1:
 		for event in pygame.event.get():
@@ -44,8 +67,13 @@ def main():
 						current_shape.status = 'moveleft'
 			elif event.type == KEYUP:
 				current_shape.status = None
-
 		
+		move_down(blocks, cleared) 
+		
+		cleared = row_check(blocks) 
+		
+		blocks = clear_rows(blocks, cleared)
+
 		if collided(current_shape, blocks):
 			current_shape.at_bottom = True
 		
@@ -66,7 +94,7 @@ def main():
 			pygame.draw.rect(screen, black, bk, 1)
 		
 		pygame.display.update()
-		pygame.time.delay(30)
+		pygame.time.delay(200)
 		
 	
 
