@@ -54,7 +54,7 @@ class Grid:
 		for r in rows:
 			for b in copy_blocks:
 				if b[1] == r:
-					self.blocks.remove(b)
+					blocks.remove(b)
 
 	def move_down(self, rows): #called before clear rows
 		for r in rows:
