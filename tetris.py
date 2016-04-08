@@ -8,7 +8,6 @@ def main():
 	screen = pygame.display.set_mode([300, 720])
 	color = 255, 255, 255
 	black = 0, 0, 0
-	block = pygame.Rect((0, 0), (30, 30))
 	current_shape = Shape()
 	blocks = []
 
@@ -24,6 +23,14 @@ def main():
 					current_shape.status = 'moveleft'
 			elif event.type == KEYUP:
 				current_shape.status = None
+
+		collide = -1
+		
+		for b in current_shape.blocks:
+			collide = max(collide, b.collidelist(blocks))
+		
+		if collide > -1:
+			current_shape.at_bottom = True
 
 		screen.fill(color)
 		flag = current_shape.update()
