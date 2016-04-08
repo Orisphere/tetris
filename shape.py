@@ -36,8 +36,8 @@ class Shape():
 		return random.choice(shapes)
 
 	def make_blocks(self):  #create an array of blocks based on self.shape
-		#shape = self.shape 
-		shape = 'square'
+		shape = self.shape 
+		#shape = 'square'
 		self.blocks = []
 		if shape == 'l':
 			color = (240, 110, 10)

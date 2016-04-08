@@ -10,8 +10,8 @@ class Grid:
 	
 	def add_blocks(self, blocks):
 		for b in blocks:
-			x = b[0]/30
-			y = b[1]/30
+			x = int(b[0]/30)
+			y = int(b[1]/30)
 			self.grid[y][x] = 1
 		self.blocks = self.blocks + blocks
 	
@@ -32,23 +32,38 @@ class Grid:
 			
 
 	def is_valid(self, direction, shape): #checks a shape against the blocks pos to see if move is legal 
-		collide = -1
+		
 		
 		if self.blocks == []:
 			return True
 		
+		vert = not self.collide_vert(shape) #check if can move down
 		
 		if direction == 'right':
 			for b in shape.blocks:
-				new_rect = b.move(30, 30)
-				collide = max(collide, new_rect.collidelist(self.blocks))
-			return collide == -1
+				row = int(b[1]/30)
+				col = int(b[0]/30)
+				if vert:
+					if self.grid[row+1][col+1] == 1:
+						return False
+				else:
+					if self.grid[row][col+1] == 1:
+						return False
+			
+			return True 
 		
 		if direction == 'left':
 			for b in shape.blocks:
-				new_rect = b.move(-30, 30)
-				collide = max(collide, new_rect.collidelist(self.blocks))
-			return collide == -1
+				row = int(b[1]/30)
+				col = int(b[0]/30)
+				if vert:
+					if self.grid[row+1][col-1] == 1:
+						return False
+				else:
+					if self.grid[row][col-1] == 1:
+						return False
+			
+			return True 
 
 	def row_check(self):
 		rows = [] #checks grid blocks and returns rows that should be cleared
