@@ -36,7 +36,7 @@ def main():
 		
 		grid.clear_rows(cleared)
 
-		if grid.collided(current_shape):
+		if grid.collided_vert(current_shape):
 			current_shape.at_bottom = True
 		
 		flag = current_shape.update() #flags if shape reached bottom or top/bottom collided with another block
