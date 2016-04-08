@@ -6,8 +6,9 @@ from shape import Shape
 def main():
 	pygame.init()
 	screen = pygame.display.set_mode([300, 720])
-	color = 255, 255, 255
+	white = 255, 255, 255
 	black = 0, 0, 0
+	purple = 155, 0, 155
 	current_shape = Shape()
 	blocks = []
 
@@ -29,20 +30,22 @@ def main():
 		for b in current_shape.blocks:
 			collide = max(collide, b.collidelist(blocks))
 		
-		if collide:
+		if collide > -1:
 			current_shape.at_bottom = True
 
-		screen.fill(color)
-		flag = current_shape.update()
+
+		screen.fill(white)
+		flag = current_shape.update() #flags if shape reached bottom or collided with another block
 		
 		if flag:
 			blocks = blocks + current_shape.blocks
 			current_shape = Shape()
 
 		for b in current_shape.blocks:
+			pygame.draw.rect(screen, current_shape.color, b, 0)
 			pygame.draw.rect(screen, black, b, 1)
-
 		for bk in blocks:
+			pygame.draw.rect(screen, purple, bk, 0)
 			pygame.draw.rect(screen, black, bk, 1)
 		
 		pygame.display.update()
