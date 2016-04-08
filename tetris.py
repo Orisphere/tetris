@@ -15,12 +15,23 @@ def collided(shape, blocks): #checks for collision between a shape and a list of
 		
 
 def is_valid(direction, shape, blocks): #checks a shape against the current blocks to see if movement is legal 
+	collide = -1
+	
 	if blocks == []:
 		return True
+	
+	
 	if direction == 'right':
-		return True 
+		for b in shape.blocks:
+			new_rect = b.move(30, 30)
+			collide = max(collide, new_rect.collidelist(blocks))
+		return collide == -1
+	
 	if direction == 'left':
-		return True
+		for b in shape.blocks:
+			new_rect = b.move(-30, 30)
+			collide = max(collide, new_rect.collidelist(blocks))
+		return collide == -1
 
 def row_check(blocks):
 	rows = [] #checks y-coors of blocks and returns rows that should be cleared
@@ -96,7 +107,7 @@ def main():
 			pygame.draw.rect(screen, black, bk, 1)
 		
 		pygame.display.update()
-		pygame.time.delay(100)
+		pygame.time.delay(200)
 		
 	
 
