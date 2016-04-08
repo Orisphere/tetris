@@ -8,7 +8,8 @@ def collided(shape, blocks): #checks for collision between a shape and a list of
 	collide = -1
 		
 	for b in shape.blocks:  #check for top/bottom collisions
-		collide = max(collide, b.collidelist(blocks))
+		new_rect = b.move(0, 1)
+		collide = max(collide, new_rect.collidelist(blocks))
 	
 	return collide > -1
 		
@@ -31,8 +32,9 @@ def row_check(blocks):
 	return rows
 
 def clear_rows(blocks, rows): #delete rows
+	copy_blocks = copy.copy(blocks)
 	for r in rows:
-		for b in blocks:
+		for b in copy_blocks:
 			if b[1] == r:
 				blocks.remove(b)
 
@@ -94,7 +96,7 @@ def main():
 			pygame.draw.rect(screen, black, bk, 1)
 		
 		pygame.display.update()
-		pygame.time.delay(200)
+		pygame.time.delay(100)
 		
 	
 

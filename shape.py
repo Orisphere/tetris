@@ -40,50 +40,50 @@ class Shape():
 		self.blocks = []
 		if shape == 'l':
 			color = (240, 110, 10)
-			self.blocks.append(Block((120, 30), (30, 31), color))
-			self.blocks.append(Block((150, 30), (30, 31), color))
-			self.blocks.append(Block((180, 30), (30, 31), color))
-			self.blocks.append(Block((180, 0), (30, 31), color))
+			self.blocks.append(Block((120, 30), (30, 30), color))
+			self.blocks.append(Block((150, 30), (30, 30), color))
+			self.blocks.append(Block((180, 30), (30, 30), color))
+			self.blocks.append(Block((180, 0), (30, 30), color))
 		if shape == 'i':
 			color = (255, 255, 0)
-			self.blocks.append(Block((90,0), (30, 31), color))
-			self.blocks.append(Block((120, 0), (30, 31), color))
-			self.blocks.append(Block((150, 0), (30, 31), color))
-			self.blocks.append(Block((180, 0), (30, 31), color))
+			self.blocks.append(Block((90,0), (30, 30), color))
+			self.blocks.append(Block((120, 0), (30, 30), color))
+			self.blocks.append(Block((150, 0), (30, 30), color))
+			self.blocks.append(Block((180, 0), (30, 30), color))
 		if shape == 'square':
 			color = (0, 255, 255)
-			self.blocks.append(Block((120, 30), (30, 31), color))
-			self.blocks.append(Block((120, 0), (30, 31), color))
-			self.blocks.append(Block((150, 0), (30, 31), color))
-			self.blocks.append(Block((150, 30), (30, 31), color))
+			self.blocks.append(Block((120, 30), (30, 30), color))
+			self.blocks.append(Block((120, 0), (30, 30), color))
+			self.blocks.append(Block((150, 0), (30, 30), color))
+			self.blocks.append(Block((150, 30), (30, 30), color))
 		if shape == 'z':
 			color = (127, 0, 255)
-			self.blocks.append(Block((90,0), (30, 31), color))
-			self.blocks.append(Block((120, 0), (30, 31), color))
-			self.blocks.append(Block((120, 30), (30, 31), color))
-			self.blocks.append(Block((150, 30), (30, 31), color))
+			self.blocks.append(Block((90,0), (30, 30), color))
+			self.blocks.append(Block((120, 0), (30, 30), color))
+			self.blocks.append(Block((120, 30), (30, 30), color))
+			self.blocks.append(Block((150, 30), (30, 30), color))
 		if shape == 's':
 			color = (255, 51, 255)
-			self.blocks.append(Block((90, 30), (30, 31), color))
-			self.blocks.append(Block((120, 30), (30, 31), color))
-			self.blocks.append(Block((120, 0), (30, 31), color))
-			self.blocks.append(Block((150, 0), (30, 31), color))
+			self.blocks.append(Block((90, 30), (30, 30), color))
+			self.blocks.append(Block((120, 30), (30, 30), color))
+			self.blocks.append(Block((120, 0), (30, 30), color))
+			self.blocks.append(Block((150, 0), (30, 30), color))
 		if shape == 't':
 			color = (0, 255, 0)
-			self.blocks.append(Block((120, 30), (30, 31), color))
-			self.blocks.append(Block((150, 0), (30, 31), color))
-			self.blocks.append(Block((150, 30), (30, 31), color))
-			self.blocks.append(Block((180, 30), (30, 31), color))
+			self.blocks.append(Block((120, 30), (30, 30), color))
+			self.blocks.append(Block((150, 0), (30, 30), color))
+			self.blocks.append(Block((150, 30), (30, 30), color))
+			self.blocks.append(Block((180, 30), (30, 30), color))
 		if shape == 'j':
 			color = (0, 0, 204)
-			self.blocks.append(Block((120, 0), (30, 31), color))
-			self.blocks.append(Block((120, 30), (30, 31), color))
-			self.blocks.append(Block((150, 30), (30, 31), color))
-			self.blocks.append(Block((180, 30), (30, 31), color))
+			self.blocks.append(Block((120, 0), (30, 30), color))
+			self.blocks.append(Block((120, 30), (30, 30), color))
+			self.blocks.append(Block((150, 30), (30, 30), color))
+			self.blocks.append(Block((180, 30), (30, 30), color))
 
 	def movedown(self): #move all the blocks in a shape
 		for b in self.blocks:
-			if b.bottom > 720:
+			if b.bottom >= 720:
 				self.at_bottom = True
 				return
 		for b in self.blocks:
