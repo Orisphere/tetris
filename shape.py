@@ -15,7 +15,7 @@ class Shape():
 		
 		if self.at_bottom:
 			self.status = None
-			pass #add blocks to list of blocks
+			return True
 		else:
 			self.movedown()
 			

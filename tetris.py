@@ -26,10 +26,17 @@ def main():
 				current_shape.status = None
 
 		screen.fill(color)
-		current_shape.update()
-	
+		flag = current_shape.update()
+		
+		if flag:
+			blocks = blocks + current_shape.blocks
+			current_shape = Shape()
+
 		for b in current_shape.blocks:
 			pygame.draw.rect(screen, black, b, 1)
+
+		for bk in blocks:
+			pygame.draw.rect(screen, black, bk, 1)
 		
 		pygame.display.update()
 		pygame.time.delay(150)
