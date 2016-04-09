@@ -18,12 +18,11 @@ class Grid:
 			row = int(b[1]/30)
 			col = int(b[0]/30) + 1
 			self.grid[row][col] = 1
-			print(self.grid)
 		self.blocks = self.blocks + blocks
 	
 	def collided_vert(self, shape): #checks for top/bottom collisions or bottom of screen
 				
-		for b in shape.blocks:  #check for top/bottom collisions
+		for b in shape.blocks:
 			row = int(b[1]/30)
 			col =int(b[0]/30) + 1
 			if self.grid[row+1][col] == 1:

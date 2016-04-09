@@ -14,7 +14,8 @@ def main():
 	cleared = []
 	current_shape = Shape()
 	grid = Grid()
-
+	lost = False
+	
 	while 1:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -27,9 +28,12 @@ def main():
 				if event.key == K_LEFT:
 					if grid.is_valid('left', current_shape):
 						current_shape.status = 'moveleft'
+				if event.key == K_SPACE:
+						lost = False
 			elif event.type == KEYUP:
 				current_shape.status = None
 		
+			
 		grid.move_down(cleared) 
 		
 		cleared = grid.row_check() 
@@ -45,6 +49,8 @@ def main():
 		if at_bottom: #shape can't go down further so add its blocks to the list of blocks
 			grid.add_blocks(current_shape.blocks)
 			current_shape = Shape()
+			if grid.collided_vert(current_shape):
+				lost = True
 		
 		screen.fill(white)
 
@@ -56,6 +62,16 @@ def main():
 			pygame.draw.rect(screen, bk.color, bk, 0)
 			pygame.draw.rect(screen, black, bk, 1)
 		
+		if lost:
+			font = pygame.font.Font(None, 50)
+			text = font.render("You lost!", 1, purple)
+			text_rect = text.get_rect(centerx=screen.get_width()/2, centery=screen.get_height()/2)
+			screen.fill(white)
+			screen.blit(text, text_rect)
+			grid = Grid()
+			current_shape = Shape()
+
+			
 		pygame.display.update()
 		pygame.time.delay(200)
 		
