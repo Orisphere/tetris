@@ -10,7 +10,9 @@ class Shape(): #responsible for dealing with player controlled tetraminos
 		self.make_blocks()
 		self.at_bottom = False
 		self.status = None
-	
+		self.orientations = None
+		self.rotate = None
+
 	def update(self):
 		
 		if self.at_bottom:
@@ -84,17 +86,12 @@ class Shape(): #responsible for dealing with player controlled tetraminos
 
 	def moveleft(self):
 		for b in self.blocks:
-			if b.left <= 0:
-				return
-		for b in self.blocks:
 			b.move_ip(-30, 0)
 	
 	def moveright(self):
-		for b in self.blocks:
-			if b.right >= 300:
-				return
 		for b in self.blocks:
 			b.move_ip(30, 0)
 
 	def rotate(self):
 		pass
+		#if self.
