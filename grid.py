@@ -35,7 +35,7 @@ class Grid:
 	def is_valid(self, direction, shape): #checks a shape against the blocks pos to see if move is legal 
 		
 		vert = not self.collided_vert(shape) #check if can move down
-		if direction == 'right':
+		if direction == 'moveright':
 			for b in shape.blocks:
 				row = int(b[1]/30)
 				col = int(b[0]/30) + 1
@@ -48,7 +48,7 @@ class Grid:
 			
 			return True 
 		
-		if direction == 'left':
+		if direction == 'moveleft':
 			for b in shape.blocks:
 				row = int(b[1]/30)
 				col = int(b[0]/30) + 1

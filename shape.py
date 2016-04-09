@@ -3,7 +3,7 @@ from block import Block
 import random 
 
 
-class Shape():
+class Shape(): #responsible for dealing with player controlled tetraminos
 
 	def __init__(self):
 		self.shape = self.random_shape()
@@ -21,12 +21,9 @@ class Shape():
 		if self.status == 'moveright':
 			self.moveright()
 		
-		if self.status == 'moveleft':
+		elif self.status == 'moveleft':
 			self.moveleft()
 		
-		if self.status == 'movedown':
-			self.movedown()
-
 		if self.status == 'rotate':
 			self.rotate()
 
@@ -83,10 +80,6 @@ class Shape():
 
 	def movedown(self): #move all the blocks in a shape
 		for b in self.blocks:
-			if b.bottom >= 720:
-				self.at_bottom = True
-				return
-		for b in self.blocks:
 			b.move_ip(0, 30)
 
 	def moveleft(self):
@@ -98,7 +91,7 @@ class Shape():
 	
 	def moveright(self):
 		for b in self.blocks:
-			if b.right >=300:
+			if b.right >= 300:
 				return
 		for b in self.blocks:
 			b.move_ip(30, 0)

@@ -23,28 +23,32 @@ def main():
 			
 			elif event.type == KEYDOWN:
 				if event.key == K_RIGHT:
-					if grid.is_valid('right', current_shape):
-						current_shape.status = 'moveright'
+					current_shape.status = 'moveright'
 				if event.key == K_LEFT:
-					if grid.is_valid('left', current_shape):
-						current_shape.status = 'moveleft'
+					current_shape.status = 'moveleft'
 				if event.key == K_SPACE:
 						lost = False
 			elif event.type == KEYUP:
-				current_shape.status = None
+				if event.key == K_RIGHT and current_shape.status == 'moveright':
+					current_shape.status = None
+				if event.key == K_LEFT and current_shape.status == 'moveleft':
+					current_shape.status = None
+	
+		if not grid.is_valid(current_shape.status, current_shape): #check if proposed move is legal
+			current_shape.status = None		
+
+		grid.move_down(cleared) #move down blocks if a row has been cleared
 		
-			
-		grid.move_down(cleared) 
+		cleared = grid.row_check()  #check for cleared rows
 		
-		cleared = grid.row_check() 
+		grid.clear_rows(cleared) #delete blocks from cleared rows
 		
-		grid.clear_rows(cleared)
-		
-		at_bottom = grid.collided_vert(current_shape)
+		at_bottom = grid.collided_vert(current_shape) #check if the current shape can move down further
 		
 		current_shape.at_bottom = at_bottom
 		
-		current_shape.update() 
+		current_shape.update() #move the current shape
+
 
 		if at_bottom: #shape can't go down further so add its blocks to the list of blocks
 			grid.add_blocks(current_shape.blocks)
