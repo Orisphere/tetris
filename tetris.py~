@@ -35,13 +35,14 @@ def main():
 		cleared = grid.row_check() 
 		
 		grid.clear_rows(cleared)
-
-		if grid.collided(current_shape):
-			current_shape.at_bottom = True
 		
-		flag = current_shape.update() #flags if shape reached bottom or top/bottom collided with another block
+		at_bottom = grid.collided_vert(current_shape)
+		
+		current_shape.at_bottom = at_bottom
+		
+		current_shape.update() 
 
-		if flag: #shape can't go down further so add its blocks to the list of blocks
+		if at_bottom: #shape can't go down further so add its blocks to the list of blocks
 			grid.add_blocks(current_shape.blocks)
 			current_shape = Shape()
 		

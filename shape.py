@@ -15,7 +15,6 @@ class Shape():
 		
 		if self.at_bottom:
 			self.status = None
-			return True
 		else:
 			self.movedown()
 			
